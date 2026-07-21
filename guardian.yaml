@@ -1,0 +1,38 @@
+# GuardianAgent Configuration
+# Minimal config — all settings have sensible defaults
+# Model: GPT-5.6 (fallback: gpt-4o)
+
+version: "1"
+
+ai:
+  model: gpt-5.6          # Primary reasoning model
+  fallback_model: gpt-4o  # Fallback if GPT-5.6 unavailable
+  temperature: 0.3
+
+scanning:
+  patterns:
+    - all  # Use all 200+ built-in patterns
+  entropy_threshold: 4.5
+  exclude:
+    - "**/*.lock"
+    - "**/node_modules/**"
+    - "**/vendor/**"
+    - ".git/**"
+    - "tests/fixtures/**"
+
+nist:
+  profile: enterprise  # starter | enterprise | critical
+
+pipeline:
+  gate_mode: hard              # advisory | warn | hard
+  block_on_severity: high      # critical | high | medium
+
+reporting:
+  executive_narrative: true
+  formats:
+    - json
+    - html
+
+ai_guardrails:
+  enabled: true
+  audit_log: true
